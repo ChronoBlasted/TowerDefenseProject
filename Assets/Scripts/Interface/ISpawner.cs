@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ISpawner : MonoBehaviour
+public interface ISpawner
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    GameObject ObjectToSpawn { get; set; }
+    Vector2 SpawnPosition { get; set; }
+    public void Spawn();
 }

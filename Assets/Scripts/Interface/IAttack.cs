@@ -1,18 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IAttack : MonoBehaviour
+public interface IAttack
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    int Strenght { get; set; }
+    float AttackSpeed { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public event EventHandler OnAttack;
+
+    public void Attack();
+    public void ChooseTarget();
 }
