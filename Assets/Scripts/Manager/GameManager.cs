@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    GAMESTATE GameState = GAMESTATE.START;
+    GAMESTATE GameState;
+
+    private void Awake()
+    {
+        GameState = GAMESTATE.START;
+    }
+
+    public void StartGame()
+    {
+        GameState = GAMESTATE.GAME;
+    }
+
+    public void EndGame()
+    {
+        GameState = GAMESTATE.END;
+    }
 
 }
 public enum GAMESTATE

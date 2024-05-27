@@ -5,6 +5,6 @@ using UnityEngine;
 
 public interface IMove
 {
-    public event EventHandler OnDestinationReached;
+    public event Action OnDestinationReached;
     public void MoveTo();
 }
