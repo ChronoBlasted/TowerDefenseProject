@@ -7,4 +7,7 @@ public interface ISpawner
     GameObject ObjectToSpawn { get; set; }
     Vector2 SpawnPosition { get; set; }
     public void Spawn();
+
+
+    
 }
