@@ -69,7 +69,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     public void Spawn()
     {
-
+        //Sressources 
         Dictionary<string, int> AAA = new Dictionary<string, int>();
         AAA.Add("Gold", 2);
 
@@ -87,7 +87,6 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         else
         {
             print("can not pose because You PAUVRE");
-
         }
 
     }
