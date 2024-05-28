@@ -6,12 +6,14 @@ using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour, IMove, IAttack
 {
-    [SerializeField] float bulletSpeed = 1;
-    [SerializeField] float sunriseAmount = 10;
+    [SerializeField] float sunriseAmount = 1;
     [SerializeField] GameObject bulletRenderer;
+
+    [SerializeField] float bulletSpeed = 1;
     [SerializeField] float normalSpeedAtDistance = 2;
     [SerializeField] AnimationCurve easeCurve;
 
+    [SerializeField] ParticleSystem onDieFX;
 
     [HideInInspector]
     public GameObject currentTarget;
@@ -48,11 +50,11 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     {
         foreach (var item in allMonsterToDamage)
         {
-            //Take Damage
             Debug.Log("Take Damage");
         }
 
-        // Do fx
+        var currentFX = Instantiate(onDieFX, onDieFX.transform.position, Quaternion.identity, null);
+        currentFX.gameObject.SetActive(true);
 
         Destroy(gameObject);
     }
