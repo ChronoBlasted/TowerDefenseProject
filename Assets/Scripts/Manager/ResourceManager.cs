@@ -7,17 +7,25 @@ public class ResourceManager : MonoSingleton<ResourceManager>
 {
     Dictionary<string, int> AmountOfResources = new Dictionary<string, int>();
     [SerializeField] int goldAmount; 
-    // Start is called before the first frame update
+
     void Start()
     {
         AmountOfResources.Add("Gold", 10);
         goldAmount = AmountOfResources["Gold"];
+
+        UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void AddResources(Dictionary<string, int> AmountToAdd)
     {
-        
+        foreach (string ressource in AmountToAdd.Keys)
+        {
+            AmountOfResources[ressource] += AmountToAdd[ressource];
+        }
+        goldAmount = AmountOfResources["Gold"];
+
+        UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
     public void SpendResources(Dictionary<string, int> AmountSpend)
@@ -27,6 +35,8 @@ public class ResourceManager : MonoSingleton<ResourceManager>
             AmountOfResources[ressource] -= AmountSpend[ressource];
         }
         goldAmount = AmountOfResources["Gold"];
+
+        UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
     public bool EnoughRessource(Dictionary<string, int> AmountNeeded )

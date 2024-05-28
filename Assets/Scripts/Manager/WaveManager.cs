@@ -65,6 +65,9 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator NextWaveCoroutine()
     {
+        currentWave++;
+        UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
+
         yield return new WaitForSeconds(timeBetweenWaves);
         for (int i = 0; i < amountOfMonsterPerWave; i++)
         {

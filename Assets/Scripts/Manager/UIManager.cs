@@ -1,18 +1,128 @@
-using System.Collections;
-using System.Collections.Generic;
+using BaseTemplate.Behaviours;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoSingleton<UIManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Canvas _mainCanvas;
+
+    [SerializeField] StartView _startView;
+    [SerializeField] GameView _gameView;
+    [SerializeField] EndView _endView;
+
+    [Header("Black Shade Ref")]
+    [SerializeField] Button _blackShadeButton;
+    [SerializeField] Image _blackShadeImg;
+
+    View _currentView;
+
+    public Canvas MainCanvas { get => _mainCanvas; }
+    public GameView GameView { get => _gameView; }
+    public StartView StartView { get => _startView;  }
+    public EndView EndView { get => _endView; }
+
+    Tweener _blackShadeTweener;
+
+    public void Start()
     {
-        
+        GameManager.Instance.OnGameStateChanged += HandleStateChange;
+
+        InitView();
+
+        ChangeView(_startView);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InitView()
     {
-        
+        _startView.Init();
+        _gameView.Init();
+        _endView.Init();
+
+        HideBlackShade();
+    }
+
+    public void ChangeView(View newPanel)
+    {
+        if (newPanel == _currentView) return;
+
+        if (_currentView != null)
+        {
+            CloseView(_currentView);
+        }
+
+        _currentView = newPanel;
+        _currentView.gameObject.SetActive(true);
+
+        _currentView.OpenView();
+
+    }
+
+    void CloseView(View newPanel)
+    {
+        newPanel.CloseView();
+    }
+
+
+
+
+    #region GameState
+
+    void HandleStateChange(GAMESTATE newState)
+    {
+        switch (newState)
+        {
+            case GAMESTATE.START:
+                HandleMenu();
+                break;
+            case GAMESTATE.GAME:
+                HandleGame();
+                break;
+            case GAMESTATE.END:
+                HandleEnd();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void HandleMenu()
+    {
+        ChangeView(_startView);
+    }
+    void HandleGame()
+    {
+        ChangeView(_gameView);
+    }
+    void HandleEnd()
+    {
+        ChangeView(_endView);
+    }
+
+    #endregion
+
+
+    public void ShowBlackShade(UnityAction _onClickAction)
+    {
+        if (_blackShadeTweener.IsActive()) _blackShadeTweener.Kill();
+
+        _blackShadeTweener = _blackShadeImg.DOFade(.5f, .1f);
+
+        _blackShadeImg.raycastTarget = true;
+
+        _blackShadeButton.onClick.AddListener(_onClickAction);
+    }
+
+    public void HideBlackShade(bool _instant = true)
+    {
+        if (_blackShadeTweener.IsActive()) _blackShadeTweener.Kill();
+
+        if (_instant) _blackShadeTweener = _blackShadeImg.DOFade(0f, 0);
+        else _blackShadeTweener = _blackShadeImg.DOFade(0f, .1f);
+
+        _blackShadeImg.raycastTarget = false;
+
+        _blackShadeButton.onClick.RemoveAllListeners();
     }
 }
