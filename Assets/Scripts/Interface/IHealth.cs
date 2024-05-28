@@ -9,8 +9,8 @@ public interface IHealth
     int Health { get; set; }
     int RecoveryPerSeconds { get; set; }
 
-    public event EventHandler OnDie;
+    public event Action OnDie;
 
-    public void TakeDamage();
+    public void TakeDamage(int n);
     public void Recovery();
 }
