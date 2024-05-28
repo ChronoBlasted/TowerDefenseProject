@@ -5,9 +5,9 @@ using UnityEngine;
 
 public interface IHealth
 {
-    int MaxHealth { get; set; }
-    int Health { get; set; }
-    int RecoveryPerSeconds { get; set; }
+    float MaxHealth { get; set; }
+    float Health { get; set; }
+    float RecoveryPerSeconds { get; set; }
 
     public event Action OnDie;
 
