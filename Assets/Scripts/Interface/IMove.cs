@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public interface IMove
 {
-    NavMeshAgent agent { get; set; }
-    
-    public event EventHandler OnDestinationReached;
+    public event Action OnDestinationReached;
     public void MoveTo();
 }

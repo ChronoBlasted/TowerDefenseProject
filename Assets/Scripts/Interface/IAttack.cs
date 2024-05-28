@@ -10,6 +10,8 @@ public interface IAttack
 
     public event EventHandler OnAttack;
 
+    LayerMask TargetLayers { get; set; }
+
     public void Attack();
     public void ChooseTarget();
 }

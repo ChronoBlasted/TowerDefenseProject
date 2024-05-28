@@ -22,10 +22,12 @@ public class WaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsters = new Dictionary<GameObject, int>();
         for (int i = 0; i < enemyTypes.Length; i++)
         {
             monsters.Add(enemyTypes[i], probability[i]);
         }
+        StartCoroutine(NextWaveCoroutine());
     }
 
     public void ChooseRandomMonster()
@@ -43,6 +45,7 @@ public class WaveManager : MonoBehaviour
             if (randomValue < entry.Value)
             {
                 Instantiate(entry.Key, spawnerList[Random.Range(0, spawnerList.Length)]);
+                break;
             }
             else
             {
@@ -66,6 +69,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < amountOfMonsterPerWave; i++)
         {
             ChooseRandomMonster();
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
