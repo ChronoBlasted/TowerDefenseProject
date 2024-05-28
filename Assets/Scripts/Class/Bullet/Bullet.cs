@@ -115,7 +115,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     {
         if (other.gameObject.layer == 20)
         {
-            allMonsterToDamage.Add(other.gameObject);
+            allMonsterToDamage.Add(other.GetComponent<AMonster>());
         }
     }
 
@@ -123,7 +123,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     {
         if (other.gameObject.layer == 20)
         {
-            allMonsterToDamage.Remove(other.gameObject);
+            allMonsterToDamage.Remove(other.GetComponent<AMonster>());
         }
     }
 }
