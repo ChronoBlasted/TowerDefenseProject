@@ -1,4 +1,5 @@
 using BaseTemplate.Behaviours;
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,5 +40,9 @@ public class ResourceManager : MonoSingleton<ResourceManager>
             }
         }
         return false;
+    }
+    public void AddResources(int n)
+    {
+        
     }
 }

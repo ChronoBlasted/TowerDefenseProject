@@ -31,6 +31,18 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     float startTime;
     List<GameObject> allMonsterToDamage = new List<GameObject>();
 
+    event EventHandler IAttack.OnAttack
+    {
+        add
+        {
+            throw new NotImplementedException();
+        }
+
+        remove
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     private void Awake()
     {

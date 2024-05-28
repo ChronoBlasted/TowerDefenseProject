@@ -31,6 +31,19 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public event Action OnAttack;
 
+    event EventHandler IAttack.OnAttack
+    {
+        add
+        {
+            throw new NotImplementedException();
+        }
+
+        remove
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     private void Start()
     {
         OnAttack += Spawn;

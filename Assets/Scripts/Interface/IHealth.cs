@@ -11,6 +11,6 @@ public interface IHealth
 
     public event Action OnDie;
 
-    public void TakeDamage(int n);
+    public void TakeDamage(float n);
     public void Recovery();
 }
