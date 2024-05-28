@@ -7,14 +7,21 @@ using UnityEngine;
 public class GridManager : MonoSingleton<GridManager>, ISpawner
 {
 
-    [SerializeField] Dictionary<GameObject, Vector2> AllCasesOccupied = new Dictionary<GameObject, Vector2>();
-    [SerializeField] Vector2  DebuggerMouse;
+    [SerializeField] Dictionary<Vector2, GameObject> AllCasesOccupied = new Dictionary<Vector2 ,GameObject>();
+    [SerializeField] Vector2  DebuggerMouse, AreaSize;
     [SerializeField] GameObject currentTower, enviro;
     [SerializeField] Camera cam;
-    [SerializeField] LayerMask mask;
+    [SerializeField] LayerMask gridMask, objectMask;
+    [SerializeField] List<Vector2> PathsOQP;
+
 
     public GameObject ObjectToSpawn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public Vector2 SpawnPosition { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    void Start()
+    {
+        VerifyStartCells();
+    }
 
     private void Update()
     {
@@ -22,7 +29,8 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
         if (Input.GetMouseButtonDown(0))
         {
-            Spawn();
+            //     Spawn();
+            VerifyStartCells();
         }
     }
     
@@ -38,7 +46,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, gridMask))
         {
             return hit.point;
         }
@@ -56,7 +64,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     public bool GetCellInfo(Vector2 pos)
     {
-        if (AllCasesOccupied.ContainsValue(pos))
+        if (AllCasesOccupied.ContainsKey(pos))
             return false;    
         else
             return true;
@@ -69,7 +77,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     public void Spawn()
     {
-        //Sressources 
+        //Ressources 
         Dictionary<string, int> AAA = new Dictionary<string, int>();
         AAA.Add("Gold", 2);
 
@@ -78,7 +86,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
             if (GetCellInfo(DebuggerMouse))
             {
                 GameObject newTower = Instantiate(currentTower, currentTower.transform.position, currentTower.transform.rotation, enviro.transform);
-                AllCasesOccupied.Add(newTower, DebuggerMouse);
+                AllCasesOccupied.Add(DebuggerMouse,newTower);
                 ResourceManager.Instance.SpendResources(AAA);
             }
             else
@@ -89,6 +97,27 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
             print("can not pose because You PAUVRE");
         }
 
+    }
+
+    void VerifyStartCells()
+    {
+        for (int i = (int)(AreaSize.x/-2); i <= AreaSize.x; i++)
+        {
+            for (int y = (int)(AreaSize.y / -2); y <= AreaSize.y; y++)
+            {
+                Vector2 Coordinate = new Vector2(i, y);
+                
+
+                Collider[] AAA = Physics.OverlapBox(new Vector3(Coordinate.x, 0, Coordinate.y), Vector3.one * 0.5f,Quaternion.Euler(Vector3.zero),objectMask);
+                if (AAA.Length >= 1)
+                {
+                    foreach(Collider col in  AAA)
+                    {
+                        AllCasesOccupied.Add(Coordinate, col.gameObject);
+                    }
+                }
+            }   
+        }
     }
 }
 
