@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tower : MonoBehaviour, ISpawner, IAttack
+public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 {
     [SerializeField] float attackSpeed;
     [SerializeField] int attackStrenght;
@@ -24,7 +24,7 @@ public class Tower : MonoBehaviour, ISpawner, IAttack
     float timeSinceLastShot;
 
     public GameObject ObjectToSpawn { get => towerBullet.gameObject; set => throw new System.NotImplementedException(); }
-    public Vector2 SpawnPosition { get => canon.position; set => canon.position = value; }
+    public Vector3 SpawnPosition { get => canon.position; set => canon.position = value; }
     public int Strenght { get => attackStrenght; set => attackStrenght = value; }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
 
@@ -70,6 +70,7 @@ public class Tower : MonoBehaviour, ISpawner, IAttack
 
     public void Spawn()
     {
+        Debug.Log(SpawnPosition);
         currentGameobject = Instantiate(ObjectToSpawn, SpawnPosition, canon.rotation);
         currentBullet = currentGameobject.GetComponent<Bullet>();
 
@@ -84,17 +85,24 @@ public class Tower : MonoBehaviour, ISpawner, IAttack
 
     #region event
 
-
     private void OnTriggerEnter(Collider other)
     {
-        monstersInRange.Add(other.gameObject);
+        if (other.gameObject.layer == 20)
+        {
+            monstersInRange.Add(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (currentTarget == other.gameObject) ChooseTarget();
-        monstersInRange.Remove(other.gameObject);
-    }
+        if (other.gameObject.layer == 20)
+        {
+            monstersInRange.Remove(other.gameObject);
 
+            if (currentTarget == other.gameObject) ChooseTarget();
+        }
+    }
     #endregion
 }
+
+

@@ -5,6 +5,6 @@ using UnityEngine;
 public interface ISpawner
 {
     GameObject ObjectToSpawn { get; set; }
-    Vector2 SpawnPosition { get; set; }
+    Vector3 SpawnPosition { get; set; }
     public void Spawn();
 }
