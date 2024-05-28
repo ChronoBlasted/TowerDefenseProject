@@ -1,9 +1,10 @@
+using BaseTemplate.Behaviours;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class WaveManager : MonoSingleton<WaveManager>
 {
     public GameObject[] enemyTypes;
 
@@ -13,6 +14,7 @@ public class WaveManager : MonoBehaviour
 
     [Space(10)]
     public int amountOfMonsterPerWave;
+    public int amountOfMonsterAddedPerWave;
     public int currentWave;
     public int timeBetweenWaves;
 
@@ -69,7 +71,8 @@ public class WaveManager : MonoBehaviour
         UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
-        for (int i = 0; i < amountOfMonsterPerWave; i++)
+        currentWave++;
+        for (int i = 0; i < (amountOfMonsterPerWave + (currentWave * amountOfMonsterAddedPerWave)) ; i++)
         {
             ChooseRandomMonster();
             yield return new WaitForSeconds(0.5f);

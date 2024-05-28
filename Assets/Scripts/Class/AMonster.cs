@@ -8,13 +8,15 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 {
     public float movementSpeed;
     [SerializeField] private float _MaxHealth, _Health, _RecoveryPerSeconds;
-    public Transform target;
+    [SerializeField] private int _Strength;
+    private Nexus nexus;
     private NavMeshAgent agent;
-    
-    public float MaxHealth { get => _MaxHealth; set => new int(); }
-    public float Health { get => _Health; set => new int(); }
-    public float RecoveryPerSeconds { get => _RecoveryPerSeconds; set => new int(); }
-    public int Strength { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int coinReward;
+
+    public float MaxHealth { get => _MaxHealth; set => _MaxHealth = value; }
+    public float Health { get => _Health; set => _Health = value; }
+    public float RecoveryPerSeconds { get => _RecoveryPerSeconds; set => _RecoveryPerSeconds = value; }
+    public int Strength { get => _Strength; set => Strength = value; }
     public float AttackSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public LayerMask TargetLayers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -22,7 +24,18 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     public event Action OnAttack;
     public event Action OnDestinationReached;
 
-    private WaveManager waveManager;
+    event EventHandler IAttack.OnAttack
+    {
+        add
+        {
+            throw new NotImplementedException();
+        }
+
+        remove
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public void Recovery()
     {
@@ -32,7 +45,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         }
     }
 
-    public void TakeDamage(int n)
+    public void TakeDamage(float n)
     {
         Health -= n;
         if (Health <= 0)
@@ -45,10 +58,10 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     {
         OnDie += DropResouces;
         OnDie += CheckWaveState;
-        waveManager = FindObjectOfType<WaveManager>();
         Health = MaxHealth;
-        target = FindObjectOfType<Nexus>().transform;
+        OnDestinationReached += Attack;
         agent = GetComponent<NavMeshAgent>();
+        ChooseTarget();
     }
 
     void FixedUpdate()
@@ -63,33 +76,36 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 
     void DropResouces()
     {
-
+        ResourceManager.Instance.AddResources(coinReward);
     }
 
     void CheckWaveState()
     {
-        waveManager.CheckNextWave();
+        WaveManager.Instance.CheckNextWave();
         Destroy(this.gameObject);
+
+        Debug.Log("ded");
     }
 
     public void Attack()
     {
-        throw new NotImplementedException();
+        nexus.TakeDamage(Strength);
+        TakeDamage(MaxHealth);
     }
 
     public void ChooseTarget()
     {
-
+        nexus = FindObjectOfType<Nexus>();
     }
 
     public void MoveTo()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
+        float distance = Vector3.Distance(nexus.transform.position, transform.position);
         NavMeshPath navMeshPath = new NavMeshPath();
 
-        if (agent.CalculatePath(target.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+        if (agent.CalculatePath(nexus.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(nexus.transform.position);
             agent.speed = movementSpeed;
         }
 
@@ -101,8 +117,16 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 
     void FaceTarget()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (nexus.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            OnDestinationReached.Invoke();
+        }
     }
 }

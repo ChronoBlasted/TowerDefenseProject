@@ -18,7 +18,7 @@ public class Nexus : MonoBehaviour, IHealth
         //throw new NotImplementedException();
     }
 
-    public void TakeDamage(int n)
+    public void TakeDamage(float n)
     {
         Health -= n;
         if (Health < 0)
