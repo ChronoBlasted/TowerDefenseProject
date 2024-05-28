@@ -8,7 +8,7 @@ using UnityEngine;
 public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 {
     [SerializeField] float attackSpeed;
-    [SerializeField] int attackStrenght;
+    [SerializeField] int attackStrength;
     [SerializeField] Transform canon;
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] Bullet towerBullet;
@@ -25,9 +25,9 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public GameObject ObjectToSpawn { get => towerBullet.gameObject; set => throw new System.NotImplementedException(); }
     public Vector3 SpawnPosition { get => canon.position; set => canon.position = value; }
-    public int Strenght { get => attackStrenght; set => attackStrenght = value; }
+    public int Strength { get => attackStrength; set => attackStrength = value; }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-
+    public LayerMask TargetLayers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public event Action OnAttack;
 
@@ -70,11 +70,10 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public void Spawn()
     {
-        Debug.Log(SpawnPosition);
         currentGameobject = Instantiate(ObjectToSpawn, SpawnPosition, canon.rotation);
         currentBullet = currentGameobject.GetComponent<Bullet>();
 
-        currentBullet.Strenght = Strenght;
+        currentBullet.Strength = Strength;
         currentBullet.currentTarget = currentTarget;
     }
 

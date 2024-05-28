@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Nexus : MonoBehaviour, IHealth
 {
-    [SerializeField] private int  PDV, MaxPDV;
+    [SerializeField] private float PDV, MaxPDV;
 
-
-    public int MaxHealth { get => MaxPDV; set => MaxPDV = value;}
-    public int Health { get => PDV; set => PDV = value; }
-    public int RecoveryPerSeconds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public float MaxHealth { get => MaxPDV; set => MaxPDV = value;}
+    public float Health { get => PDV; set => PDV = value; }
+    public float RecoveryPerSeconds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public event Action OnDie;
 
@@ -40,7 +39,4 @@ public class Nexus : MonoBehaviour, IHealth
         }
 
     }
-
-
-
 }

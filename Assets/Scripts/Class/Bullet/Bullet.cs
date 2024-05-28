@@ -18,13 +18,14 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     [HideInInspector]
     public GameObject currentTarget;
 
-    public int Strenght { get => strenght; set => strenght = value; }
+    public int Strength { get => strength; set => strength = value; }
     public float AttackSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public LayerMask TargetLayers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public event Action OnAttack;
     public event Action OnDestinationReached;
 
-    int strenght;
+    int strength;
     Vector3 sunrisePosition;
     Vector3 lastPosition;
     float startTime;

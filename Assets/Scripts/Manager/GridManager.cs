@@ -16,7 +16,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
 
     public GameObject ObjectToSpawn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public Vector2 SpawnPosition { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public Vector3 SpawnPosition { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void Start()
     {

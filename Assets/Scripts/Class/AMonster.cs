@@ -14,12 +14,12 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     public float MaxHealth { get => _MaxHealth; set => new int(); }
     public float Health { get => _Health; set => new int(); }
     public float RecoveryPerSeconds { get => _RecoveryPerSeconds; set => new int(); }
-    public int Strengh { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int Strength { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float AttackSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public LayerMask TargetLayers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public event Action OnDie;
-    public event EventHandler OnAttack;
+    public event Action OnAttack;
     public event Action OnDestinationReached;
 
     private WaveManager waveManager;

@@ -6,12 +6,12 @@ using UnityEngine;
 public class ResourceManager : MonoSingleton<ResourceManager>
 {
     Dictionary<string, int> AmountOfResources = new Dictionary<string, int>();
-    [SerializeField] int goldAmountDebugg; 
+    [SerializeField] int goldAmount; 
     // Start is called before the first frame update
     void Start()
     {
         AmountOfResources.Add("Gold", 10);
-        goldAmountDebugg = AmountOfResources["Gold"];
+        goldAmount = AmountOfResources["Gold"];
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         {
             AmountOfResources[ressource] -= AmountSpend[ressource];
         }
-        goldAmountDebugg = AmountOfResources["Gold"];
+        goldAmount = AmountOfResources["Gold"];
     }
 
     public bool EnoughRessource(Dictionary<string, int> AmountNeeded )

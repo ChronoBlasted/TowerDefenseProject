@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IAttack
 {
-    int Strengh { get; set; }
+    int Strength { get; set; }
     float AttackSpeed { get; set; }
 
     public event Action OnAttack;
