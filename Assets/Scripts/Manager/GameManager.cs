@@ -58,9 +58,9 @@ public class GameManager : MonoSingleton<GameManager>
         OnGameStateChanged?.Invoke(gameState);
     }
 
-    public void UpdateStateToMenu() => UpdateGameState(GAMESTATE.START);
+    public void UpdateStateToStart() => UpdateGameState(GAMESTATE.START);
     public void UpdateStateToGame() => UpdateGameState(GAMESTATE.GAME);
-    public void UpdateStateToWait() => UpdateGameState(GAMESTATE.END);
+    public void UpdateStateToEnd() => UpdateGameState(GAMESTATE.END);
 
     public void ReloadScene()
     {

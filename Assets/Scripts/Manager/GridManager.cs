@@ -78,8 +78,8 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
     public void Spawn()
     {
         //Ressources 
-        Dictionary<string, int> AAA = new Dictionary<string, int>();
-        AAA.Add("Gold", 2);
+        Dictionary<RESOURCETYPE, int> AAA = new Dictionary<RESOURCETYPE, int>();
+        AAA.Add(RESOURCETYPE.GOLD, 2);
 
         if (ResourceManager.Instance.EnoughRessource(AAA))
         {

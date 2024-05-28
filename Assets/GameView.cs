@@ -10,6 +10,13 @@ public class GameView : View
     [SerializeField] TMP_Text currentWaveTxt;
     [SerializeField] Button bowButton, rockButton;
 
+    public override void OpenView(float duration = 0.2F)
+    {
+        base.OpenView(duration);
+
+        UpdateTowerButtonState();
+    }
+
     public void UpdateAmountGold(int newAmountOfGold)
     {
         goldAmountTxt.text = newAmountOfGold.ToString();
@@ -17,23 +24,23 @@ public class GameView : View
 
     public void UpdateCurrentWave(int newAmountOfWave)
     {
-        currentWaveTxt.text = newAmountOfWave.ToString();
+        currentWaveTxt.text = "Wave : " + newAmountOfWave;
     }
 
     public void UpdateTowerButtonState()
     {
-        Dictionary<string, int> TowerBow = new Dictionary<string, int> // C'est bien overkill ca ahahah
+        Dictionary<RESOURCETYPE, int> TowerBow = new Dictionary<RESOURCETYPE, int> // C'est bien overkill ca ahahah
         {
-            { "Gold", 10 }
+            { RESOURCETYPE.GOLD, 10 }
         };
         if (ResourceManager.Instance.EnoughRessource(TowerBow)) bowButton.interactable = true;
         else bowButton.interactable = false;
 
-        Dictionary<string, int> TowerRock = new Dictionary<string, int>
+        Dictionary<RESOURCETYPE, int> TowerRock = new Dictionary<RESOURCETYPE, int>
         {
-            { "Gold", 30 }
+            { RESOURCETYPE.GOLD, 30 }
         };
-        if (ResourceManager.Instance.EnoughRessource(TowerRock)) bowButton.interactable = true;
-        else bowButton.interactable = false;
+        if (ResourceManager.Instance.EnoughRessource(TowerRock)) rockButton.interactable = true;
+        else rockButton.interactable = false;
     }
 }

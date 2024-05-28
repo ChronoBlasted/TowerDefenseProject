@@ -3,45 +3,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RESOURCETYPE
+{
+    GOLD,
+}
+
 public class ResourceManager : MonoSingleton<ResourceManager>
 {
-    Dictionary<string, int> AmountOfResources = new Dictionary<string, int>();
+    Dictionary<RESOURCETYPE, int> AmountOfResources = new Dictionary<RESOURCETYPE, int>();
     [SerializeField] int goldAmount; 
 
     void Start()
     {
-        AmountOfResources.Add("Gold", 10);
-        goldAmount = AmountOfResources["Gold"];
+        AmountOfResources.Add(RESOURCETYPE.GOLD, 20);
+        goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
         UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
 
-    public void AddResources(Dictionary<string, int> AmountToAdd)
+    public void AddResources(Dictionary<RESOURCETYPE, int> AmountToAdd)
     {
-        foreach (string ressource in AmountToAdd.Keys)
+        foreach (RESOURCETYPE ressource in AmountToAdd.Keys)
         {
             AmountOfResources[ressource] += AmountToAdd[ressource];
         }
-        goldAmount = AmountOfResources["Gold"];
+        goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
         UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
-    public void SpendResources(Dictionary<string, int> AmountSpend)
+    public void SpendResources(Dictionary<RESOURCETYPE, int> AmountSpend)
     {
-        foreach (string ressource in AmountSpend.Keys)
+        foreach (RESOURCETYPE ressource in AmountSpend.Keys)
         {
             AmountOfResources[ressource] -= AmountSpend[ressource];
         }
-        goldAmount = AmountOfResources["Gold"];
+        goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
         UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
-    public bool EnoughRessource(Dictionary<string, int> AmountNeeded )
+    public bool EnoughRessource(Dictionary<RESOURCETYPE, int> AmountNeeded )
     {
-        foreach(string ressource in AmountNeeded.Keys)
+        foreach(RESOURCETYPE ressource in AmountNeeded.Keys)
         {
             if (AmountNeeded[ressource] <= AmountOfResources[ressource])
             {

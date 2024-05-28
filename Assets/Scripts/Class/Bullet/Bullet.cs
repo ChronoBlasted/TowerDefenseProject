@@ -29,7 +29,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     Vector3 sunrisePosition;
     Vector3 lastPosition;
     float startTime;
-    List<GameObject> allMonsterToDamage = new List<GameObject>();
+    List<AMonster> allMonsterToDamage = new List<AMonster>();
 
 
     private void Awake()
@@ -49,9 +49,9 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
 
     public void Attack()
     {
-        foreach (var item in allMonsterToDamage)
+        foreach (var monster in allMonsterToDamage)
         {
-            Debug.Log("Take Damage");
+            monster.TakeDamage(Strength);
         }
 
         var currentFX = Instantiate(onDieFX, onDieFX.transform.position, Quaternion.identity, null);

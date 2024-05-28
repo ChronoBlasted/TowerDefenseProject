@@ -103,15 +103,14 @@ public class UIManager : MonoSingleton<UIManager>
     #endregion
 
 
-    public void ShowBlackShade(UnityAction _onClickAction)
+    public void ShowBlackShade()
     {
         if (_blackShadeTweener.IsActive()) _blackShadeTweener.Kill();
 
-        _blackShadeTweener = _blackShadeImg.DOFade(.5f, .1f);
+        _blackShadeTweener = _blackShadeImg.DOFade(1, .5f);
 
         _blackShadeImg.raycastTarget = true;
 
-        _blackShadeButton.onClick.AddListener(_onClickAction);
     }
 
     public void HideBlackShade(bool _instant = true)
@@ -122,7 +121,5 @@ public class UIManager : MonoSingleton<UIManager>
         else _blackShadeTweener = _blackShadeImg.DOFade(0f, .1f);
 
         _blackShadeImg.raycastTarget = false;
-
-        _blackShadeButton.onClick.RemoveAllListeners();
     }
 }

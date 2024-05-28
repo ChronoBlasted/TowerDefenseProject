@@ -6,6 +6,15 @@ public class EndView : View
 {
     public void ReloadGame()
     {
+        StartCoroutine(endCoroutine());
+    }
+
+    IEnumerator endCoroutine()
+    {
+        UIManager.Instance.ShowBlackShade();
+
+        yield return new WaitForSeconds(.5f);
+
         GameManager.Instance.ReloadScene();
     }
 }
