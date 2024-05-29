@@ -9,10 +9,19 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     [SerializeField] Dictionary<Vector2, GameObject> AllCasesOccupied = new Dictionary<Vector2 ,GameObject>();
     [SerializeField] Vector2  DebuggerMouse, AreaSize;
-    [SerializeField] GameObject currentTower, enviro;
+    [SerializeField] GameObject enviro;
+    [SerializeField] public Tower currentTower;
     [SerializeField] Camera cam;
     [SerializeField] LayerMask gridMask, objectMask;
+    
+    [Header("GeneratePath")]
     [SerializeField] List<Vector2> PathsOQP;
+    [SerializeField] GameObject path;
+
+    [Header("TowerSlection")]
+    [SerializeField] Tower towerA;
+    [SerializeField] Tower towerB;
+    [SerializeField] bool getTowerA, getTowerB;
 
 
     public GameObject ObjectToSpawn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
@@ -20,6 +29,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     void Start()
     {
+        SetPath();
         VerifyStartCells();
     }
 
@@ -29,8 +39,17 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
         if (Input.GetMouseButtonDown(0))
         {
-            //     Spawn();
-            VerifyStartCells();
+            Spawn();
+            //VerifyStartCells();
+        }
+
+        if (getTowerA && currentTower != towerA) {
+            ChooseTower(towerA);
+            getTowerA = false;
+        }
+        if (getTowerB && currentTower != towerB) { 
+            ChooseTower(towerB);
+            getTowerB= false;
         }
     }
     
@@ -58,7 +77,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
     {
         int posX = Mathf.RoundToInt(WorldPosition.x);
         int posZ = Mathf.RoundToInt(WorldPosition.z);
-
+        
         return new Vector2(posX, posZ);
     }
 
@@ -69,25 +88,21 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         else
             return true;
     }
-    
-    public void ChooseTower(GameObject gO)
+
+    public void ChooseTower(Tower gO)
     {
-        currentTower = gO;
+        currentTower = Instantiate(gO,enviro.transform);
     }
 
     public void Spawn()
     {
-        //Ressources 
-        Dictionary<RESOURCETYPE, int> AAA = new Dictionary<RESOURCETYPE, int>();
-        AAA.Add(RESOURCETYPE.GOLD, 2);
-
-        if (ResourceManager.Instance.EnoughRessource(AAA))
+        if (ResourceManager.Instance.EnoughRessource(currentTower.price))
         {
             if (GetCellInfo(DebuggerMouse))
             {
-                GameObject newTower = Instantiate(currentTower, currentTower.transform.position, currentTower.transform.rotation, enviro.transform);
+                GameObject newTower = Instantiate(currentTower.gameObject, currentTower.transform.position, currentTower.transform.rotation, enviro.transform);
                 AllCasesOccupied.Add(DebuggerMouse,newTower);
-                ResourceManager.Instance.SpendResources(AAA);
+                ResourceManager.Instance.SpendResources(currentTower.price);
             }
             else
             print("can not pose because Occupied");
@@ -118,6 +133,24 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
                 }
             }   
         }
+    }
+
+    void SetPath()
+    {
+        for (int x = (int)AreaSize.x / -2; x < AreaSize.x; x++)
+        {
+            for (int y = (int)AreaSize.y / -2; y < AreaSize.y; y++)
+            {
+                Vector2 coord = new Vector2(x, y);
+                
+                if (PathsOQP.Contains(coord))
+                {                     
+                    Instantiate(path, new Vector3(coord.x, 0, coord.y), Quaternion.Euler(Vector3.zero), enviro.transform);
+                }
+
+            }
+        }
+
     }
 }
 

@@ -16,10 +16,10 @@ public class ResourceManager : MonoSingleton<ResourceManager>
 
     void Start()
     {
-        AmountOfResources.Add(RESOURCETYPE.GOLD, 20);
+        AmountOfResources.Add(RESOURCETYPE.GOLD, 100);
         goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
-        UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
+       // UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
 
@@ -42,11 +42,11 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         }
         goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
-        UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
+        //UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
-    public bool EnoughRessource(Dictionary<RESOURCETYPE, int> AmountNeeded )
-    {
+    public bool EnoughRessource(Dictionary<RESOURCETYPE, int> AmountNeeded)
+    {   
         foreach(RESOURCETYPE ressource in AmountNeeded.Keys)
         {
             if (AmountNeeded[ressource] <= AmountOfResources[ressource])
@@ -56,6 +56,7 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         }
         return false;
     }
+
     public void AddResources(int n)
     {
         

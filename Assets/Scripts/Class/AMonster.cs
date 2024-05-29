@@ -104,7 +104,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         NavMeshPath navMeshPath = new NavMeshPath();
 
         if (agent.CalculatePath(nexus.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
-        {
+        {   
             agent.SetDestination(nexus.transform.position);
             agent.speed = movementSpeed;
         }

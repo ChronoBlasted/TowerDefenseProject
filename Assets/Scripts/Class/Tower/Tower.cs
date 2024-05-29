@@ -12,6 +12,8 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     [SerializeField] Transform canon;
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] Bullet towerBullet;
+    
+    public Dictionary<RESOURCETYPE, int> price;
 
     //TimeStamp
     GameObject currentGameobject;
