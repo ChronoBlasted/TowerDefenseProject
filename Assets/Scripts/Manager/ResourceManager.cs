@@ -19,7 +19,7 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         AmountOfResources.Add(RESOURCETYPE.GOLD, 100);
         goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
-       // UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
+       UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
     }
 
 
@@ -32,6 +32,8 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
         UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
+        UIManager.Instance.GameView.DoColorAmountGold(Color.green);
+
     }
 
     public void SpendResources(Dictionary<RESOURCETYPE, int> AmountSpend)
@@ -42,7 +44,8 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         }
         goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
-        //UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
+        UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
+        UIManager.Instance.GameView.DoColorAmountGold(Color.red);
     }
 
     public bool EnoughRessource(Dictionary<RESOURCETYPE, int> AmountNeeded)
@@ -54,11 +57,9 @@ public class ResourceManager : MonoSingleton<ResourceManager>
                 return true;
             }
         }
-        return false;
-    }
+        UIManager.Instance.GameView.DoColorAmountGold(Color.red);
+        UIManager.Instance.GameView.DoShakeAmount();
 
-    public void AddResources(int n)
-    {
-        
+        return false;
     }
 }

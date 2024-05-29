@@ -68,7 +68,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     private IEnumerator NextWaveCoroutine()
     {
         currentWave++;
-       // UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
+        UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
         currentWave++;

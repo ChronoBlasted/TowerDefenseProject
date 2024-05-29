@@ -11,7 +11,9 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     [SerializeField] private int _Strength;
     private Nexus nexus;
     private NavMeshAgent agent;
-    public int coinReward;
+
+    public int amountReward;
+    public RESOURCETYPE typeReward;
 
     public float MaxHealth { get => _MaxHealth; set => _MaxHealth = value; }
     public float Health { get => _Health; set => _Health = value; }
@@ -76,7 +78,10 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 
     void DropResouces()
     {
-        ResourceManager.Instance.AddResources(coinReward);
+        ResourceManager.Instance.AddResources(new Dictionary<RESOURCETYPE, int>
+        {
+            { typeReward, amountReward }
+        });
     }
 
     void CheckWaveState()
@@ -104,7 +109,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         NavMeshPath navMeshPath = new NavMeshPath();
 
         if (agent.CalculatePath(nexus.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
-        {   
+        {
             agent.SetDestination(nexus.transform.position);
             agent.speed = movementSpeed;
         }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,11 +22,23 @@ public class GameView : View
     {
         goldAmountTxt.text = newAmountOfGold.ToString();
     }
+    public void DoColorAmountGold(Color colorText)
+    {
+        goldAmountTxt.DOColor(colorText, .2f).OnComplete(() =>
+        {
+            goldAmountTxt.DOColor(Color.white, .2f);
+        });
+    }
+    public void DoShakeAmount()
+    {
+        goldAmountTxt.transform.DOShakePosition(.2f, new Vector3(20, 0, 0),20);
+    }
 
     public void UpdateCurrentWave(int newAmountOfWave)
     {
         currentWaveTxt.text = "Wave : " + newAmountOfWave;
     }
+
 
     public void UpdateTowerButtonState()
     {
@@ -42,5 +55,10 @@ public class GameView : View
         };
         if (ResourceManager.Instance.EnoughRessource(TowerRock)) rockButton.interactable = true;
         else rockButton.interactable = false;
+    }
+
+    public void HandleOnTowerButtonClick(GameObject selectedTower)
+    {
+        GridManager.Instance.ChooseTower(selectedTower.GetComponent<Tower>());
     }
 }

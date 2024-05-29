@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class StartView : View
 {
-
+    public void HandleOnPlayClick()
+    {
+        GameManager.Instance.UpdateStateToGame();
+    }
 }

@@ -7,14 +7,16 @@ using UnityEngine;
 
 public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 {
+    public RESOURCETYPE costResourceType;
+    public int price;
+    public bool isTowerBuilt;
+
     [SerializeField] float attackSpeed;
     [SerializeField] int attackStrength;
     [SerializeField] Transform canon;
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] Bullet towerBullet;
     
-    public Dictionary<RESOURCETYPE, int> price;
-
     //TimeStamp
     GameObject currentGameobject;
     Bullet currentBullet;
@@ -58,6 +60,7 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public void ChooseTarget()
     {
+        if (isTowerBuilt == false) return;
         if (monstersInRange.Count > 0) currentTarget = monstersInRange[0];
         else
         {

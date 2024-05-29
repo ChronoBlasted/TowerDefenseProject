@@ -1,6 +1,7 @@
 using BaseTemplate.Behaviours;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -29,7 +30,6 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     void Start()
     {
-        SetPath();
         VerifyStartCells();
     }
 
@@ -96,22 +96,25 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     public void Spawn()
     {
-        if (ResourceManager.Instance.EnoughRessource(currentTower.price))
+        if (currentTower == null) return;
+
+        Dictionary<RESOURCETYPE, int> tower = new Dictionary<RESOURCETYPE, int>
+        {
+            { currentTower.costResourceType, currentTower.price }
+        };
+        if (ResourceManager.Instance.EnoughRessource(tower))
         {
             if (GetCellInfo(DebuggerMouse))
             {
-                GameObject newTower = Instantiate(currentTower.gameObject, currentTower.transform.position, currentTower.transform.rotation, enviro.transform);
-                AllCasesOccupied.Add(DebuggerMouse,newTower);
-                ResourceManager.Instance.SpendResources(currentTower.price);
+                Tower newTower = Instantiate(currentTower, currentTower.transform.position, currentTower.transform.rotation, enviro.transform);
+                newTower.isTowerBuilt = true;
+
+                AllCasesOccupied.Add(DebuggerMouse,newTower.gameObject);
+                ResourceManager.Instance.SpendResources(tower);
             }
             else
             print("can not pose because Occupied");
         }
-        else
-        {
-            print("can not pose because You PAUVRE");
-        }
-
     }
 
     void VerifyStartCells()
@@ -121,7 +124,6 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
             for (int y = (int)(AreaSize.y / -2); y <= AreaSize.y; y++)
             {
                 Vector2 Coordinate = new Vector2(i, y);
-                
 
                 Collider[] AAA = Physics.OverlapBox(new Vector3(Coordinate.x, 0, Coordinate.y), Vector3.one * 0.5f,Quaternion.Euler(Vector3.zero),objectMask);
                 if (AAA.Length >= 1)
@@ -135,6 +137,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         }
     }
 
+    [ContextMenu("CreatePath")]
     void SetPath()
     {
         for (int x = (int)AreaSize.x / -2; x < AreaSize.x; x++)

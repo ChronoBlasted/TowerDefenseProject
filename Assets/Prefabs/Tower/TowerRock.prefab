@@ -326,8 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59751d65d937064b9554442f7a3c233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  costResourceType: 0
+  price: 30
   attackSpeed: 5
-  attackStrenght: 20
+  attackStrength: 0
   canon: {fileID: 6684684847045992400}
   sphereCollider: {fileID: 8738796976676395877}
   towerBullet: {fileID: 2507630494866399142, guid: 6b5226dd6f7c9a14e9db978fd89dab6c,
