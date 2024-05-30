@@ -72,7 +72,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
         switch (targetType)
         {
             case TargetType.MONO:
-                allMonsterToDamage[0].TakeDamage(Strength);
+                if (allMonsterToDamage.Count > 0) allMonsterToDamage[0].TakeDamage(Strength);
                 break;
             case TargetType.AREA:
                 foreach (var monster in allMonsterToDamage)
@@ -88,7 +88,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     private void DieFeedbacks()
     {
         if (gameObject == null) return;
-        Instantiate(onDieFX, dieFXTransform.transform.position, Quaternion.identity,null);
+        Instantiate(onDieFX, dieFXTransform.transform.position, Quaternion.identity, null);
 
         Destroy(gameObject);
     }

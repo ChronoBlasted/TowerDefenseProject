@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraSpeed: 5
   _cameraTarget: {fileID: 7159191218601213959}
-  _maxCameraXOffset: {x: -5, y: 5}
-  _maxCameraZOffset: {x: -5, y: 5}
+  _maxCameraXOffset: {x: -10, y: 10}
+  _maxCameraZOffset: {x: -10, y: 10}
   zoomSpeed: 1
   _maxCameraYOffset: {x: -5, y: 10}
   _rotateSpeed: 0.5

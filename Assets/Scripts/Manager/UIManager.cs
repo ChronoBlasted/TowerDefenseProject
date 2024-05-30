@@ -118,7 +118,7 @@ public class UIManager : MonoSingleton<UIManager>
         if (_blackShadeTweener.IsActive()) _blackShadeTweener.Kill();
 
         if (_instant) _blackShadeTweener = _blackShadeImg.DOFade(0f, 0);
-        else _blackShadeTweener = _blackShadeImg.DOFade(0f, .1f);
+        else _blackShadeTweener = _blackShadeImg.DOFade(0f, .5f);
 
         _blackShadeImg.raycastTarget = false;
     }

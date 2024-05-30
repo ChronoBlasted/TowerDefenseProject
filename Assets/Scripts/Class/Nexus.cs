@@ -26,6 +26,8 @@ public class Nexus : MonoBehaviour, IHealth
             Health = 0;
             OnDie?.Invoke();
         }
+
+        UIManager.Instance.GameView.UpdateNexusHealth((int)Health);
     }
 
     // Start is called before the first frame update

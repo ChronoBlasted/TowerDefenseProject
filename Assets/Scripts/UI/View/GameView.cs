@@ -9,7 +9,16 @@ public class GameView : View
 {
     [SerializeField] TMP_Text goldAmountTxt;
     [SerializeField] TMP_Text currentWaveTxt;
+    [SerializeField] TMP_Text gameSpeedTxt;
+    [SerializeField] Button gameSpeedBtn;
+    [SerializeField] Image icoPause;
     [SerializeField] Button bowButton, rockButton;
+    [SerializeField] Slider nexusLife;
+
+    [SerializeField] Sprite icoPauseSprite, icoPlaySprite;
+
+    [SerializeField] float currentGameSpeed = 1;
+    bool isGamePaused;
 
     public override void OpenView(float duration = 0.2F)
     {
@@ -33,12 +42,17 @@ public class GameView : View
     }
     public void DoShakeAmount()
     {
-        goldAmountTxt.transform.DOShakePosition(.2f, new Vector3(20, 0, 0),20);
+        goldAmountTxt.transform.DOShakePosition(.2f, new Vector3(20, 0, 0), 20);
     }
 
     public void UpdateCurrentWave(int newAmountOfWave)
     {
         currentWaveTxt.text = "Wave : " + newAmountOfWave;
+    }
+
+    public void UpdateNexusHealth(int newHealth)
+    {
+        nexusLife.value = newHealth;
     }
 
 
@@ -62,5 +76,44 @@ public class GameView : View
     public void HandleOnTowerButtonClick(GameObject selectedTower)
     {
         GridManager.Instance.ChooseTower(selectedTower.GetComponent<Tower>());
+    }
+
+    public void HandleOnPauseClick()
+    {
+        if (isGamePaused == false)
+        {
+            isGamePaused = true;
+
+            gameSpeedBtn.interactable = false;
+            icoPause.sprite = icoPlaySprite;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            isGamePaused = false;
+
+            gameSpeedBtn.interactable = true;
+            icoPause.sprite = icoPauseSprite;
+            Time.timeScale = currentGameSpeed;
+        }
+    }
+
+    public void HandleOnSpeedClick()
+    {
+        if (currentGameSpeed == 1f)
+        {
+            currentGameSpeed = 2f;
+        }
+        else if (currentGameSpeed == 2f)
+        {
+            currentGameSpeed = 4f;
+        }
+        else if (currentGameSpeed == 4f)
+        {
+            currentGameSpeed = 1f;
+        }
+
+        Time.timeScale = currentGameSpeed;
+        gameSpeedTxt.text = currentGameSpeed + "X";
     }
 }
