@@ -158,6 +158,8 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     void UnchooseTower()
     {
+        if (currentTower == null) return;
+
         GameObject toDestroy = currentTower.gameObject;
         currentTower = null;
         Destroy(toDestroy);
