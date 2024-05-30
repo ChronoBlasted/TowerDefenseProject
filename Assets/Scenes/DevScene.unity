@@ -2714,11 +2714,11 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 2694615091527789427, guid: 11903de62926914489589661423e503d, type: 3}
   - {fileID: 2694615091527789427, guid: 84c1674ee50970848b6da9f630a3a638, type: 3}
-  probability: 5000000014000000
+  probability: 5a0000000a000000
   amountOfMonsterPerWave: 1
-  amountOfMonsterAddedPerWave: 0
+  amountOfMonsterAddedPerWave: 1
   currentWave: 0
-  timeBetweenWaves: 1
+  timeBetweenWaves: 5
   spawnerList:
   - {fileID: 609380202}
   - {fileID: 669895818}

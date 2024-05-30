@@ -25,6 +25,8 @@ public class WaveManager : MonoSingleton<WaveManager>
     void Start()
     {
         GameManager.Instance.OnGameStateChanged += HandleStateChange;
+        currentWave = 0;
+        UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
     }
 
     void HandleStateChange(GAMESTATE newState)
@@ -79,8 +81,15 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     public void CheckNextWave()
     {
+        StartCoroutine(CheckNextWaveCoroutine());
+    }
+
+    IEnumerator CheckNextWaveCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
         AMonster[] remainingMonsterList = FindObjectsOfType<AMonster>();
-        if (remainingMonsterList.Length == 0 ) 
+        if (remainingMonsterList.Length == 0)
         {
             StartCoroutine(NextWaveCoroutine());
         }
@@ -92,7 +101,6 @@ public class WaveManager : MonoSingleton<WaveManager>
         UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
-        currentWave++;
         for (int i = 0; i < (amountOfMonsterPerWave + (currentWave * amountOfMonsterAddedPerWave)) ; i++)
         {
             ChooseRandomMonster();
