@@ -1,18 +1,106 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InputManagers : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Movement Camera")]
+    [SerializeField] float _cameraSpeed = 10;
+    [SerializeField] GameObject _cameraTarget;
+    [SerializeField] Vector2 _maxCameraXOffset, _maxCameraZOffset;
+    Vector2 movementModifier;
+
+    [Header("Zoom Camera")]
+    [SerializeField] float zoomSpeed = 1;
+    [SerializeField] Vector2 _maxCameraYOffset;
+
+    float mouseHorizontalValue;
+    float mouseVerticalValue;
+    float mouseScrollValue;
+
+    [Header("Rotate Camera")]
+    [SerializeField] float _rotateSpeed = .5f;
+    bool switchUp;
+    int currentAngle = 0;
+    Tween rotateTween;
+
+    public void HandleMoveCamera()
     {
-        
+        _cameraTarget.transform.position += (_cameraTarget.transform.forward * (mouseVerticalValue / _cameraSpeed))
+                                            + (_cameraTarget.transform.right * (mouseHorizontalValue / _cameraSpeed));
+
+        if (_cameraTarget.transform.position.x > _maxCameraXOffset.y)
+        {
+            _cameraTarget.transform.position = new Vector3(_maxCameraXOffset.y, _cameraTarget.transform.position.y, _cameraTarget.transform.position.z);
+        }
+        if (_cameraTarget.transform.position.x < _maxCameraXOffset.x)
+        {
+            _cameraTarget.transform.position = new Vector3(_maxCameraXOffset.x, _cameraTarget.transform.position.y, _cameraTarget.transform.position.z);
+        }
+
+        if (_cameraTarget.transform.position.z > _maxCameraZOffset.y)
+        {
+            _cameraTarget.transform.position = new Vector3(_cameraTarget.transform.position.x, _cameraTarget.transform.position.y, _maxCameraZOffset.y);
+        }
+        if (_cameraTarget.transform.position.z < _maxCameraZOffset.x)
+        {
+            _cameraTarget.transform.position = new Vector3(_cameraTarget.transform.position.x, _cameraTarget.transform.position.y, _maxCameraZOffset.x);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HandleZoomCamera()
     {
-        
+        Vector3 pos = _cameraTarget.transform.position;
+        pos.y += mouseScrollValue * zoomSpeed;
+
+        if (_cameraTarget.transform.position != pos)
+        {
+            _cameraTarget.transform.position = pos;
+
+            if (_cameraTarget.transform.position.y > _maxCameraYOffset.y)
+            {
+                _cameraTarget.transform.position = new Vector3(_cameraTarget.transform.position.x, _maxCameraYOffset.y, _cameraTarget.transform.position.z);
+            }
+            if (_cameraTarget.transform.position.y < _maxCameraYOffset.x)
+            {
+                _cameraTarget.transform.position = new Vector3(_cameraTarget.transform.position.x, _maxCameraYOffset.x, _cameraTarget.transform.position.z);
+            }
+        }
+    }
+
+    public void RotateCamera(int amountRotate)
+    {
+        if (rotateTween != null)
+        {
+            rotateTween.Kill();
+        }
+
+        currentAngle += amountRotate;
+
+        if (currentAngle == 450) currentAngle = 90;
+        if (currentAngle == -90) currentAngle = 270;
+
+        rotateTween = _cameraTarget.transform.DORotate(new Vector3(0, currentAngle, 0), _rotateSpeed).SetEase(Ease.OutSine);
+    }
+
+    void FixedUpdate()
+    {
+        mouseHorizontalValue = Input.GetAxis("Mouse X");
+        mouseVerticalValue = Input.GetAxis("Mouse Y");
+
+
+        mouseScrollValue = Input.mouseScrollDelta.y * -1;
+
+        if (Input.GetMouseButton(2)) HandleMoveCamera();
+
+        HandleZoomCamera();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) RotateCamera(-90);
+        if (Input.GetKeyDown(KeyCode.A)) RotateCamera(90);
     }
 }
