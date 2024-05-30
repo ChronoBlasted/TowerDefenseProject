@@ -107,7 +107,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     {
         if (currentTarget == null)
         {
-            DieFeedbacks();
+            Destroy(gameObject);
 
             return;
         }
