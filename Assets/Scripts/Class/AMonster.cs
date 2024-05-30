@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 {
+    public float movementSpeed;
     [SerializeField] private float _MaxHealth, _Health, _RecoveryPerSeconds;
     [SerializeField] private int _Strength;
     private Nexus nexus;
-    private NavMeshAgent agent;
     public ParticleSystem deathParticleSystem, attackParticleSystem;
     public Slider healthSlider;
 
@@ -66,7 +66,6 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         OnDie += CheckWaveState;
         Health = MaxHealth;
         OnDestinationReached += Attack;
-        agent = GetComponent<NavMeshAgent>();
         ChooseTarget();
 
         healthSlider.maxValue = MaxHealth;
@@ -118,18 +117,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 
     public void MoveTo()
     {
-        float distance = Vector3.Distance(nexus.transform.position, transform.position);
-        NavMeshPath navMeshPath = new NavMeshPath();
-
-        if (agent.CalculatePath(nexus.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
-        {
-            agent.SetDestination(nexus.transform.position);
-        }
-
-        if (distance <= agent.stoppingDistance)
-        {
-            FaceTarget();
-        }
+        this.transform.position = Vector3.MoveTowards(transform.position, nexus.transform.position, movementSpeed * Time.deltaTime);
     }
 
     void FaceTarget()
