@@ -30,7 +30,10 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     void Start()
     {
+        
         VerifyStartCells();
+        
+
     }
 
     private void Update()
@@ -104,10 +107,12 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         };
         if (ResourceManager.Instance.EnoughRessource(tower))
         {
+
             if (GetCellInfo(DebuggerMouse))
             {
                 Tower newTower = Instantiate(currentTower, currentTower.transform.position, currentTower.transform.rotation, enviro.transform);
                 newTower.isTowerBuilt = true;
+                newTower.OnPose();
 
                 AllCasesOccupied.Add(DebuggerMouse,newTower.gameObject);
                 ResourceManager.Instance.SpendResources(tower);
@@ -129,7 +134,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
                 if (AAA.Length >= 1)
                 {
                     foreach(Collider col in  AAA)
-                    {
+                    { 
                         AllCasesOccupied.Add(Coordinate, col.gameObject);
                     }
                 }
@@ -140,6 +145,15 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
     [ContextMenu("CreatePath")]
     void SetPath()
     {
+        foreach(KeyValuePair<Vector2, GameObject> gO in AllCasesOccupied)
+        {
+            if (gO.Value == path)
+            {
+                Destroy(gO.Value);
+                AllCasesOccupied.Remove(gO.Key);
+            }
+        }
+
         for (int x = (int)AreaSize.x / -2; x < AreaSize.x; x++)
         {
             for (int y = (int)AreaSize.y / -2; y < AreaSize.y; y++)
@@ -149,6 +163,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
                 if (PathsOQP.Contains(coord))
                 {                     
                     Instantiate(path, new Vector3(coord.x, 0, coord.y), Quaternion.Euler(Vector3.zero), enviro.transform);
+
                 }
 
             }

@@ -389,8 +389,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerBow
       objectReference: {fileID: 0}
+    - target: {fileID: 6820625500511091442, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e26ffb81aef156846b57c1671a0759e3, type: 3}
+--- !u!1 &3543624361382958836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6660910236378177194, guid: e26ffb81aef156846b57c1671a0759e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7880513219728722014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &5398617161383150610 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2861624910304857164, guid: e26ffb81aef156846b57c1671a0759e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7880513219728722014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6234317816810512951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4312629864786193001, guid: e26ffb81aef156846b57c1671a0759e3,
@@ -417,9 +434,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costResourceType: 0
   price: 10
+  isTowerBuilt: 0
   attackSpeed: 1
   attackStrength: 0
   canon: {fileID: 2119196965623348620}
-  sphereCollider: {fileID: 0}
+  sphereCollider: {fileID: 5398617161383150610}
   towerBullet: {fileID: 6036970343354027713, guid: 4ec8ed36039da694f989edf94a252847,
     type: 3}
+  rangeZone: {fileID: 3543624361382958836}
