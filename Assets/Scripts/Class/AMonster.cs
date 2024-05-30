@@ -107,6 +107,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         nexus.TakeDamage(Strength);
         DropResouces();
         Instantiate<ParticleSystem>(attackParticleSystem, transform.position, transform.rotation);
+        CheckWaveState();
         Destroy(this.gameObject);
     }
 

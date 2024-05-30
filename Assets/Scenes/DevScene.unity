@@ -1150,7 +1150,7 @@ PrefabInstance:
     - target: {fileID: 3434942338196691814, guid: 56ad6253fa4f8f44c9be8d8a53c77816,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3434942338196691814, guid: 56ad6253fa4f8f44c9be8d8a53c77816,
         type: 3}
@@ -1878,11 +1878,12 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 2694615091527789427, guid: 11903de62926914489589661423e503d, type: 3}
   - {fileID: 2694615091527789427, guid: 84c1674ee50970848b6da9f630a3a638, type: 3}
-  probability: 5a0000000a000000
+  probability: 5000000014000000
+  cantAppearUntilWave: 0000000004000000
   amountOfMonsterPerWave: 1
   amountOfMonsterAddedPerWave: 1
   currentWave: 0
-  timeBetweenWaves: 5
+  timeBetweenWaves: 1
   spawnerList:
   - {fileID: 609380202}
   - {fileID: 669895818}
@@ -4402,7 +4403,7 @@ PrefabInstance:
     - target: {fileID: 3434942338196691814, guid: 56ad6253fa4f8f44c9be8d8a53c77816,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 3434942338196691814, guid: 56ad6253fa4f8f44c9be8d8a53c77816,
         type: 3}
