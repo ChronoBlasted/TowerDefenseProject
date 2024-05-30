@@ -1883,7 +1883,7 @@ MonoBehaviour:
   amountOfMonsterPerWave: 1
   amountOfMonsterAddedPerWave: 1
   currentWave: 0
-  timeBetweenWaves: 1
+  timeBetweenWaves: 5
   spawnerList:
   - {fileID: 609380202}
   - {fileID: 669895818}
@@ -2665,6 +2665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5df05622412ed468b3259b4ce49a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
 --- !u!1 &1495583334
 GameObject:
   m_ObjectHideFlags: 0
