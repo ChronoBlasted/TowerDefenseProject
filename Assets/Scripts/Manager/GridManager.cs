@@ -116,11 +116,13 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
                 AllCasesOccupied.Add(DebuggerMouse,newTower.gameObject);
                 ResourceManager.Instance.SpendResources(tower);
+                
             }
             else
             print("can not pose because Occupied");
         }
     }
+    
 
     void VerifyStartCells()
     {

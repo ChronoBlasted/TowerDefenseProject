@@ -329,6 +329,16 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3223791205534596360, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223791205534596362, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4312629865552402978, guid: e26ffb81aef156846b57c1671a0759e3,
         type: 3}
       propertyPath: m_RootOrder
@@ -389,6 +399,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerBow
       objectReference: {fileID: 0}
+    - target: {fileID: 5841286337711186229, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6820625500511091442, guid: e26ffb81aef156846b57c1671a0759e3,
         type: 3}
       propertyPath: m_RootOrder
@@ -442,3 +457,4 @@ MonoBehaviour:
   towerBullet: {fileID: 6036970343354027713, guid: 4ec8ed36039da694f989edf94a252847,
     type: 3}
   rangeZone: {fileID: 3543624361382958836}
+  popingParticle: {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}

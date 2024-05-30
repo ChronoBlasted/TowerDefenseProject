@@ -17,6 +17,7 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] Bullet towerBullet;
     [SerializeField] GameObject rangeZone;
+    [SerializeField] ParticleSystem popingParticle;
 
     
     //TimeStamp
@@ -106,7 +107,8 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public void OnPose()
     {
-        rangeZone.SetActive(false); 
+        popingParticle.Play();
+        Instantiate(popingParticle,transform);
     }
 
     #region event
