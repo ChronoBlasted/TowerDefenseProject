@@ -1840,6 +1840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 4918779248609702640}
+  endWave: {fileID: 4918779248472598800}
 --- !u!1 &4918779248612132798
 GameObject:
   m_ObjectHideFlags: 0

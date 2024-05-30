@@ -47,7 +47,7 @@ public class WaveManager : MonoSingleton<WaveManager>
 
                 break;
             case GAMESTATE.END:
-
+                UIManager.Instance.EndView.UpdateCurrentWave(currentWave);
                 //Faire Disparaitre les enemis
 
                 break;

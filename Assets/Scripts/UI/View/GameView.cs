@@ -21,6 +21,8 @@ public class GameView : View
     public void UpdateAmountGold(int newAmountOfGold)
     {
         goldAmountTxt.text = newAmountOfGold.ToString();
+
+        UpdateTowerButtonState();
     }
     public void DoColorAmountGold(Color colorText)
     {
