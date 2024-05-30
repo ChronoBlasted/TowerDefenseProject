@@ -117,8 +117,8 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public void OnPose()
     {
-        popingParticle.Play();
-        Instantiate(popingParticle, transform);
+        Instantiate(popingParticle,transform);
+        rangeZone.SetActive(false);
     }
 
     #region event

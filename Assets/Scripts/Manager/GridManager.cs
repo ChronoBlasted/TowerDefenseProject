@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class GridManager : MonoSingleton<GridManager>, ISpawner
 {
@@ -30,10 +30,7 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     void Start()
     {
-        
         VerifyStartCells();
-        
-
     }
 
     private void Update()
@@ -43,7 +40,10 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         if (Input.GetMouseButtonDown(0))
         {
             Spawn();
-            //VerifyStartCells();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            UnchooseTower();
         }
 
         if (getTowerA && currentTower != towerA) {
@@ -68,10 +68,13 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
+        
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, gridMask))
         {
             return hit.point;
         }
+        
        
         return new Vector3 (0,0,0);
     }
@@ -94,12 +97,16 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
     public void ChooseTower(Tower gO)
     {
+        if (currentTower != null)
+            UnchooseTower();
+
         currentTower = Instantiate(gO,enviro.transform);
     }
 
     public void Spawn()
     {
-        if (currentTower == null) return;
+        if (currentTower == null ||EventSystem.current.IsPointerOverGameObject()) 
+            return;
 
         Dictionary<RESOURCETYPE, int> tower = new Dictionary<RESOURCETYPE, int>
         {
@@ -144,6 +151,13 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         }
     }
 
+    void UnchooseTower()
+    {
+        GameObject toDestroy = currentTower.gameObject;
+        currentTower = null;
+        Destroy(toDestroy);
+    }
+
     [ContextMenu("CreatePath")]
     void SetPath()
     {
@@ -170,7 +184,6 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
             }
         }
-
     }
 }
 
