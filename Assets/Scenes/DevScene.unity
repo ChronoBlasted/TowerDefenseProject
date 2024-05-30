@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: f49bdc4c9205fb9488d2296a8d72980c, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &23914406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   amountOfMonsterPerWave: 1
   amountOfMonsterAddedPerWave: 1
   currentWave: 0
-  timeBetweenWaves: 5
+  timeBetweenWaves: 1
   spawnerList:
   - {fileID: 609380202}
   - {fileID: 669895818}
