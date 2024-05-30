@@ -11,6 +11,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     [Range(0, 100)]
     public int[] probability;
     private Dictionary<GameObject, int> monsters;
+    public int[] cantAppearUntilWave;
 
     [Space(10)]
     public int amountOfMonsterPerWave;
@@ -58,9 +59,16 @@ public class WaveManager : MonoSingleton<WaveManager>
     public void ChooseRandomMonster()
     {
         int totalProbability = 0;
-        foreach (int probability in monsters.Values)
+        /*foreach (int probability in monsters.Values)
         {
             totalProbability += probability;
+        }*/
+        for (int i = 0; i < probability.Length; i++)
+        {
+            if (cantAppearUntilWave[i] <= currentWave)
+            {
+                totalProbability += probability[i];
+            }
         }
 
         int randomValue = Random.Range(0, totalProbability);
