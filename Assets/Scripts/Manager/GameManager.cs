@@ -23,6 +23,8 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         gameState = GAMESTATE.START;
+
+        Time.timeScale = 1.0f;
     }
 
     public void StartGame()

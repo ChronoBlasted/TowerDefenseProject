@@ -274,7 +274,7 @@ MonoBehaviour:
   targetType: 0
   sunriseAmount: 2
   bulletRenderer: {fileID: 9217727967867650460}
-  bulletSpeed: 0.5
+  bulletSpeed: 0.2
   normalSpeedAtDistance: 2
   easeCurve:
     serializedVersion: 2

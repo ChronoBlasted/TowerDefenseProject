@@ -450,8 +450,8 @@ MonoBehaviour:
   costResourceType: 0
   price: 10
   isTowerBuilt: 0
-  attackSpeed: 1
-  attackStrength: 2
+  attackSpeed: 0.5
+  attackStrength: 5
   canon: {fileID: 2119196965623348620}
   sphereCollider: {fileID: 5398617161383150610}
   towerBullet: {fileID: 6036970343354027713, guid: 4ec8ed36039da694f989edf94a252847,
