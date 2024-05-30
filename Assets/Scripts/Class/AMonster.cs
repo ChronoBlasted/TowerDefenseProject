@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 {
-    public float movementSpeed;
     [SerializeField] private float _MaxHealth, _Health, _RecoveryPerSeconds;
     [SerializeField] private int _Strength;
     private Nexus nexus;
     private NavMeshAgent agent;
     public ParticleSystem deathParticleSystem, attackParticleSystem;
+    public Slider healthSlider;
 
     public int amountReward;
     public RESOURCETYPE typeReward;
@@ -52,6 +53,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     {
         Debug.Log(n);
         Health -= n;
+        healthSlider.value = Health;
         if (Health <= 0)
         {
             OnDie.Invoke();
@@ -61,12 +63,15 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     void Start()
     {
         OnDie += DropResouces;
-        OnDie += CheckWaveState;
         OnDie += DeathEffect;
+        OnDie += CheckWaveState;
         Health = MaxHealth;
         OnDestinationReached += Attack;
         agent = GetComponent<NavMeshAgent>();
         ChooseTarget();
+
+        healthSlider.maxValue = MaxHealth;
+        healthSlider.value = Health;
     }
 
     void FixedUpdate()
@@ -119,7 +124,6 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         if (agent.CalculatePath(nexus.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
         {
             agent.SetDestination(nexus.transform.position);
-            agent.speed = movementSpeed;
         }
 
         if (distance <= agent.stoppingDistance)
