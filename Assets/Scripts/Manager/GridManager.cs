@@ -43,7 +43,10 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         if (Input.GetMouseButtonDown(0))
         {
             Spawn();
-            //VerifyStartCells();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            UnchooseTower();
         }
 
         if (getTowerA && currentTower != towerA) {
@@ -144,6 +147,13 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
         }
     }
 
+    void UnchooseTower()
+    {
+        GameObject toDestroy = currentTower.gameObject;
+        currentTower = null;
+        Destroy(toDestroy);
+    }
+
     [ContextMenu("CreatePath")]
     void SetPath()
     {
@@ -170,7 +180,6 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
 
             }
         }
-
     }
 }
 

@@ -115,8 +115,6 @@ public class InputManagers : MonoBehaviour
                 break;
             case GAMESTATE.END:
 
-                //Faire Disparaitre les enemis
-
                 break;
             default:
                 break;
