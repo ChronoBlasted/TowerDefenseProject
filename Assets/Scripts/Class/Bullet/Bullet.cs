@@ -4,6 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TargetType
+{
+    MONO,
+    AREA
+}
+
 public abstract class Bullet : MonoBehaviour, IMove, IAttack
 {
     [SerializeField] float sunriseAmount = 1;
@@ -57,6 +63,8 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
         lastPosition = transform.position;
 
         OnDestinationReached += Attack;
+
+        currentTarget.GetComponent<AMonster>().OnDie += DieFeedbacks;
     }
 
     public void Attack()
@@ -66,6 +74,11 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
             monster.TakeDamage(Strength);
         }
 
+        DieFeedbacks();
+    }
+
+    private void DieFeedbacks()
+    {
         var currentFX = Instantiate(onDieFX, onDieFX.transform.position, Quaternion.identity, null);
         currentFX.gameObject.SetActive(true);
 
@@ -84,6 +97,13 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
 
     public void MoveTo()
     {
+        if (currentTarget == null)
+        {
+            DieFeedbacks();
+
+            return;
+        }
+
         var distance = (currentTarget.transform.position - sunrisePosition).magnitude;
 
         Vector3 center = (sunrisePosition + currentTarget.transform.position) * 0.5F;

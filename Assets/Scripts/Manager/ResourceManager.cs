@@ -32,8 +32,6 @@ public class ResourceManager : MonoSingleton<ResourceManager>
         goldAmount = AmountOfResources[RESOURCETYPE.GOLD];
 
         UIManager.Instance.GameView.UpdateAmountGold(goldAmount);
-        UIManager.Instance.GameView.DoColorAmountGold(Color.green);
-
     }
 
     public void SpendResources(Dictionary<RESOURCETYPE, int> AmountSpend)

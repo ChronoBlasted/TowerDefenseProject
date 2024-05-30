@@ -50,6 +50,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 
     public void TakeDamage(float n)
     {
+        Debug.Log(n);
         Health -= n;
         if (Health <= 0)
         {

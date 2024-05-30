@@ -91,8 +91,8 @@ public class InputManagers : MonoBehaviour
     {
         if (canMove == false) return;
 
-        mouseHorizontalValue = Input.GetAxis("Mouse X");
-        mouseVerticalValue = Input.GetAxis("Mouse Y");
+        mouseHorizontalValue = Input.GetAxis("Mouse X") * -1;
+        mouseVerticalValue = Input.GetAxis("Mouse Y") * -1;
 
 
         mouseScrollValue = Input.mouseScrollDelta.y * -1;
@@ -114,9 +114,6 @@ public class InputManagers : MonoBehaviour
 
                 break;
             case GAMESTATE.END:
-
-                //Faire Disparaitre les enemis
-
                 break;
             default:
                 break;

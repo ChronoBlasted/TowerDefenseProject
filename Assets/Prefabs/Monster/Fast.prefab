@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23890bdeb5750c74eb15ba5b7108229d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 8
+  movementSpeed: 4
   _MaxHealth: 5
   _Health: 5
-  _RecoveryPerSeconds: 1
+  _RecoveryPerSeconds: 0
   _Strength: 2
   deathParticleSystem: {fileID: 198405478074982118, guid: 4adffb0018aeda44e9263f901167af1f,
     type: 3}

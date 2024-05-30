@@ -19,7 +19,7 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     [SerializeField] GameObject rangeZone;
     [SerializeField] ParticleSystem popingParticle;
 
-    
+
     //TimeStamp
     GameObject currentGameobject;
     Bullet currentBullet;
@@ -54,7 +54,6 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     private void Start()
     {
         OnAttack += Spawn;
-        
     }
 
     public void Attack()
@@ -64,8 +63,16 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
 
     public void ChooseTarget()
     {
-        if (isTowerBuilt == false) return;
-        if (monstersInRange.Count > 0) currentTarget = monstersInRange[0];
+        if (monstersInRange.Count > 0)
+        {
+            currentTarget = monstersInRange[0];
+
+            currentTarget.GetComponent<AMonster>().OnDie += () =>
+            {
+                monstersInRange.Remove(currentTarget.gameObject);
+                ChooseTarget();
+            };
+        }
         else
         {
             currentTarget = null;
@@ -73,8 +80,12 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
         }
     }
 
+
+
     private void Update()
     {
+        if (isTowerBuilt == false) return;
+
         timeSinceLastShot += Time.deltaTime;
 
         if (currentTarget == null) ChooseTarget();
@@ -94,7 +105,6 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     {
         currentGameobject = Instantiate(ObjectToSpawn, SpawnPosition, canon.rotation);
         currentBullet = currentGameobject.GetComponent<Bullet>();
-        
 
         currentBullet.Strength = Strength;
         currentBullet.currentTarget = currentTarget;
@@ -108,7 +118,7 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     public void OnPose()
     {
         popingParticle.Play();
-        Instantiate(popingParticle,transform);
+        Instantiate(popingParticle, transform);
     }
 
     #region event

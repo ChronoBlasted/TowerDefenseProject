@@ -50,7 +50,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918779246772875884}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -2505,6 +2505,77 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4918779246772875883}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4918779246772875883}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateTowerButtonState
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: HandleOnTowerButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 7289484184078339338, guid: 65959d5efb8fca44f9ff9e325112f715,
+        type: 3}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537761712167995066, guid: a0fc44471bf779041839759d6cff88dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2537761712167995071, guid: a0fc44471bf779041839759d6cff88dc,
         type: 3}
