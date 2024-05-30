@@ -26,6 +26,8 @@ public class InputManagers : MonoBehaviour
     int currentAngle = 0;
     Tween rotateTween;
 
+    bool canMove;
+
     public void HandleMoveCamera()
     {
         _cameraTarget.transform.position += (_cameraTarget.transform.forward * (mouseVerticalValue / _cameraSpeed))
@@ -87,6 +89,8 @@ public class InputManagers : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (canMove == false) return;
+
         mouseHorizontalValue = Input.GetAxis("Mouse X");
         mouseVerticalValue = Input.GetAxis("Mouse Y");
 
@@ -98,8 +102,36 @@ public class InputManagers : MonoBehaviour
         HandleZoomCamera();
     }
 
+    void HandleStateChange(GAMESTATE newState)
+    {
+        switch (newState)
+        {
+            case GAMESTATE.START:
+                break;
+            case GAMESTATE.GAME:
+
+                canMove = true;
+
+                break;
+            case GAMESTATE.END:
+
+                //Faire Disparaitre les enemis
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.OnGameStateChanged += HandleStateChange;
+    }
+
     private void Update()
     {
+        if (canMove == false) return;
+
         if (Input.GetKeyDown(KeyCode.E)) RotateCamera(-90);
         if (Input.GetKeyDown(KeyCode.A)) RotateCamera(90);
     }

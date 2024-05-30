@@ -24,12 +24,33 @@ public class WaveManager : MonoSingleton<WaveManager>
     // Start is called before the first frame update
     void Start()
     {
-        monsters = new Dictionary<GameObject, int>();
-        for (int i = 0; i < enemyTypes.Length; i++)
+        GameManager.Instance.OnGameStateChanged += HandleStateChange;
+    }
+
+    void HandleStateChange(GAMESTATE newState)
+    {
+        switch (newState)
         {
-            monsters.Add(enemyTypes[i], probability[i]);
+            case GAMESTATE.START:
+                break;
+            case GAMESTATE.GAME:
+
+                monsters = new Dictionary<GameObject, int>();
+                for (int i = 0; i < enemyTypes.Length; i++)
+                {
+                    monsters.Add(enemyTypes[i], probability[i]);
+                }
+                StartCoroutine(NextWaveCoroutine());
+
+                break;
+            case GAMESTATE.END:
+
+                //Faire Disparaitre les enemis
+
+                break;
+            default:
+                break;
         }
-        StartCoroutine(NextWaveCoroutine());
     }
 
     public void ChooseRandomMonster()
