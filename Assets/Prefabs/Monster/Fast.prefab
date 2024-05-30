@@ -104,7 +104,12 @@ MonoBehaviour:
   _Health: 5
   _RecoveryPerSeconds: 1
   _Strength: 2
-  coinReward: 3
+  deathParticleSystem: {fileID: 198405478074982118, guid: 4adffb0018aeda44e9263f901167af1f,
+    type: 3}
+  attackParticleSystem: {fileID: 19800000, guid: 77ec3c4e07a36814fb3169ecef41b50a,
+    type: 3}
+  amountReward: 2
+  typeReward: 0
 --- !u!1001 &4818954505231643624
 PrefabInstance:
   m_ObjectHideFlags: 0

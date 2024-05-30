@@ -389,6 +389,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerBow
       objectReference: {fileID: 0}
+    - target: {fileID: 6820625500511091442, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e26ffb81aef156846b57c1671a0759e3, type: 3}
 --- !u!4 &6234317816810512951 stripped
@@ -417,6 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costResourceType: 0
   price: 10
+  isTowerBuilt: 0
   attackSpeed: 1
   attackStrength: 0
   canon: {fileID: 2119196965623348620}
