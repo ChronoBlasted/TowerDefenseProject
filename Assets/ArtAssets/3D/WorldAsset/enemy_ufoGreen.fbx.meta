@@ -3,7 +3,22 @@ guid: d2548b869d2afe24ebbbeffcab705120
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: foliage
+    second: {fileID: 2100000, guid: ab1a77e8bf5cac9419afd01dc400803a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: cf55a41db0e02ba45b53bb03c04c20e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snowRoad
+    second: {fileID: 2100000, guid: 97c0e75306e48324fbaf2e482b8184d4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

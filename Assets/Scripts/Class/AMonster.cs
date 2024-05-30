@@ -11,6 +11,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     [SerializeField] private int _Strength;
     private Nexus nexus;
     private NavMeshAgent agent;
+    public ParticleSystem deathParticleSystem, attackParticleSystem;
 
     public int amountReward;
     public RESOURCETYPE typeReward;
@@ -60,6 +61,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     {
         OnDie += DropResouces;
         OnDie += CheckWaveState;
+        OnDie += DeathEffect;
         Health = MaxHealth;
         OnDestinationReached += Attack;
         agent = GetComponent<NavMeshAgent>();
@@ -87,15 +89,20 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     void CheckWaveState()
     {
         WaveManager.Instance.CheckNextWave();
-        Destroy(this.gameObject);
+    }
 
-        Debug.Log("ded");
+    void DeathEffect()
+    {
+        Instantiate<ParticleSystem>(deathParticleSystem, transform.position, transform.rotation);
+        Destroy(this.gameObject);
     }
 
     public void Attack()
     {
         nexus.TakeDamage(Strength);
-        TakeDamage(MaxHealth);
+        DropResouces();
+        Instantiate<ParticleSystem>(attackParticleSystem, transform.position, transform.rotation);
+        Destroy(this.gameObject);
     }
 
     public void ChooseTarget()
