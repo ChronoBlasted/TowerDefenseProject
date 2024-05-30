@@ -356,7 +356,7 @@ MonoBehaviour:
   price: 30
   isTowerBuilt: 0
   attackSpeed: 5
-  attackStrength: 0
+  attackStrength: 5
   canon: {fileID: 6684684847045992400}
   sphereCollider: {fileID: 8738796976676395877}
   towerBullet: {fileID: 2507630494866399142, guid: 6b5226dd6f7c9a14e9db978fd89dab6c,

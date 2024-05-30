@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3279298102020146785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7018919924158676742}
-  m_Layer: 15
-  m_Name: DieFXTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7018919924158676742
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279298102020146785}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.249}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9159551082873990559}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7533046970272271710
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +204,16 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 6036970343354027713}
+    - target: {fileID: 7732075539415986554, guid: e46a9dcd6c78ff548a59293662075dc1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732075539415986554, guid: e46a9dcd6c78ff548a59293662075dc1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8318930958771497874, guid: e46a9dcd6c78ff548a59293662075dc1,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -262,6 +241,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46a9dcd6c78ff548a59293662075dc1, type: 3}
+--- !u!4 &6901786193623427776 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7732075539415986554, guid: e46a9dcd6c78ff548a59293662075dc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3784651261861616570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7763644306210256906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6862299569256637360, guid: e46a9dcd6c78ff548a59293662075dc1,
@@ -315,16 +300,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dieFXTransform: {fileID: 7018919924158676742}
+  dieFXTransform: {fileID: 6901786193623427776}
   onDieFX: {fileID: 19800000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
   currentTarget: {fileID: 0}
   allMonsterToDamage: []
---- !u!4 &9159551082873990559 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5447257043016709669, guid: e46a9dcd6c78ff548a59293662075dc1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3784651261861616570}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9217727967867650460 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5435346647931525670, guid: e46a9dcd6c78ff548a59293662075dc1,

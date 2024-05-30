@@ -69,9 +69,17 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
 
     public void Attack()
     {
-        foreach (var monster in allMonsterToDamage)
+        switch (targetType)
         {
-            monster.TakeDamage(Strength);
+            case TargetType.MONO:
+                allMonsterToDamage[0].TakeDamage(Strength);
+                break;
+            case TargetType.AREA:
+                foreach (var monster in allMonsterToDamage)
+                {
+                    monster.TakeDamage(Strength);
+                }
+                break;
         }
 
         DieFeedbacks();
@@ -80,8 +88,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     private void DieFeedbacks()
     {
         if (gameObject == null) return;
-
-        Instantiate(onDieFX, onDieFX.transform.position, Quaternion.identity, null);
+        Instantiate(onDieFX, dieFXTransform.transform.position, Quaternion.identity,null);
 
         Destroy(gameObject);
     }
@@ -100,8 +107,6 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     {
         if (currentTarget == null)
         {
-            if (gameObject == null) return;
-
             DieFeedbacks();
 
             return;
