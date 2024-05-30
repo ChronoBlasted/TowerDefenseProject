@@ -49,6 +49,11 @@ public class WaveManager : MonoSingleton<WaveManager>
             case GAMESTATE.END:
                 UIManager.Instance.EndView.UpdateCurrentWave(currentWave);
                 //Faire Disparaitre les enemis
+                AMonster[] remainingMonsterList = FindObjectsOfType<AMonster>();
+                foreach (AMonster m in remainingMonsterList)
+                {
+                    Destroy(m.gameObject);
+                }
 
                 break;
             default:
@@ -97,7 +102,7 @@ public class WaveManager : MonoSingleton<WaveManager>
         yield return new WaitForEndOfFrame();
 
         AMonster[] remainingMonsterList = FindObjectsOfType<AMonster>();
-        if (remainingMonsterList.Length == 0)
+        if (remainingMonsterList.Length == 0 && GameManager.Instance.gameState == GAMESTATE.GAME)
         {
             StartCoroutine(NextWaveCoroutine());
         }

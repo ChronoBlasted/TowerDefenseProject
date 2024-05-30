@@ -14,7 +14,7 @@ public enum GAMESTATE
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    GAMESTATE gameState;
+    public GAMESTATE gameState;
 
     public  event Action<GAMESTATE> OnGameStateChanged;
 
