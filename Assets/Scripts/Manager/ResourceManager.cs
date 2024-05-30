@@ -55,9 +55,6 @@ public class ResourceManager : MonoSingleton<ResourceManager>
                 return true;
             }
         }
-        UIManager.Instance.GameView.DoColorAmountGold(Color.red);
-        UIManager.Instance.GameView.DoShakeAmount();
-
         return false;
     }
 }

@@ -51,7 +51,6 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 
     public void TakeDamage(float n)
     {
-        Debug.Log(n);
         Health -= n;
         healthSlider.value = Health;
         if (Health <= 0)

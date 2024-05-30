@@ -65,13 +65,14 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     {
         if (monstersInRange.Count > 0)
         {
-            currentTarget = monstersInRange[0];
-
-            currentTarget.GetComponent<AMonster>().OnDie += () =>
+            if (monstersInRange[0] == null )
             {
-                monstersInRange.Remove(currentTarget.gameObject);
-                ChooseTarget();
-            };
+                monstersInRange.Remove(monstersInRange[0]);
+                currentTarget = null;
+                return;
+            }
+
+            currentTarget = monstersInRange[0];
         }
         else
         {

@@ -128,6 +128,11 @@ public class GridManager : MonoSingleton<GridManager>, ISpawner
             else
             print("can not pose because Occupied");
         }
+        else
+        {
+            UIManager.Instance.GameView.DoColorAmountGold(Color.red);
+            UIManager.Instance.GameView.DoShakeAmount();
+        }
     }
     
 

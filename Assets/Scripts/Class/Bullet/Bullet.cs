@@ -12,6 +12,7 @@ public enum TargetType
 
 public abstract class Bullet : MonoBehaviour, IMove, IAttack
 {
+    [SerializeField] TargetType targetType;
     [SerializeField] float sunriseAmount = 1;
     [SerializeField] GameObject bulletRenderer;
 
@@ -19,6 +20,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     [SerializeField] float normalSpeedAtDistance = 2;
     [SerializeField] AnimationCurve easeCurve;
 
+    [SerializeField] Transform dieFXTransform;
     [SerializeField] ParticleSystem onDieFX;
 
     [HideInInspector]
@@ -35,7 +37,7 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     Vector3 sunrisePosition;
     Vector3 lastPosition;
     float startTime;
-    List<AMonster> allMonsterToDamage = new List<AMonster>();
+    public List<AMonster> allMonsterToDamage = new List<AMonster>();
 
     event EventHandler IAttack.OnAttack
     {
@@ -63,8 +65,6 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
         lastPosition = transform.position;
 
         OnDestinationReached += Attack;
-
-        currentTarget.GetComponent<AMonster>().OnDie += DieFeedbacks;
     }
 
     public void Attack()
@@ -79,8 +79,9 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
 
     private void DieFeedbacks()
     {
-        var currentFX = Instantiate(onDieFX, onDieFX.transform.position, Quaternion.identity, null);
-        currentFX.gameObject.SetActive(true);
+        if (gameObject == null) return;
+
+        Instantiate(onDieFX, onDieFX.transform.position, Quaternion.identity, null);
 
         Destroy(gameObject);
     }
@@ -99,6 +100,8 @@ public abstract class Bullet : MonoBehaviour, IMove, IAttack
     {
         if (currentTarget == null)
         {
+            if (gameObject == null) return;
+
             DieFeedbacks();
 
             return;

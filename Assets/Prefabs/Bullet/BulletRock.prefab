@@ -246,6 +246,21 @@ PrefabInstance:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5182316580054801735, guid: e46a9dcd6c78ff548a59293662075dc1,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182316580054801735, guid: e46a9dcd6c78ff548a59293662075dc1,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182316580054801735, guid: e46a9dcd6c78ff548a59293662075dc1,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5447257043016709669, guid: e46a9dcd6c78ff548a59293662075dc1,
         type: 3}
       propertyPath: m_RootOrder
@@ -311,6 +326,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7669272288886418189, guid: e46a9dcd6c78ff548a59293662075dc1,
+        type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2507630494866399142}
     - target: {fileID: 8318930958771497874, guid: e46a9dcd6c78ff548a59293662075dc1,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -342,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb41deeb14e233e4abce064167c6c3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetType: 1
   sunriseAmount: 0.1
   bulletRenderer: {fileID: 8998093132202039037}
   bulletSpeed: 2
@@ -381,6 +402,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   onDieFX: {fileID: 1482611177029050338}
   currentTarget: {fileID: 0}
+  allMonsterToDamage: []
 --- !u!4 &8946708069314214654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5447257043016709669, guid: e46a9dcd6c78ff548a59293662075dc1,
