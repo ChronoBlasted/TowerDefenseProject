@@ -240,6 +240,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3223791205534596360, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223791205534596362, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4312629865552402978, guid: e26ffb81aef156846b57c1671a0759e3,
         type: 3}
       propertyPath: m_RootOrder
@@ -300,8 +310,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerRock
       objectReference: {fileID: 0}
+    - target: {fileID: 5841286337711186229, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820625500511091442, guid: e26ffb81aef156846b57c1671a0759e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e26ffb81aef156846b57c1671a0759e3, type: 3}
+--- !u!1 &180345937614932355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6660910236378177194, guid: e26ffb81aef156846b57c1671a0759e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6841241874702571305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7289484183452187968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4312629864786193001, guid: e26ffb81aef156846b57c1671a0759e3,
@@ -328,12 +354,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costResourceType: 0
   price: 30
+  isTowerBuilt: 0
   attackSpeed: 5
   attackStrength: 0
   canon: {fileID: 6684684847045992400}
   sphereCollider: {fileID: 8738796976676395877}
   towerBullet: {fileID: 2507630494866399142, guid: 6b5226dd6f7c9a14e9db978fd89dab6c,
     type: 3}
+  rangeZone: {fileID: 180345937614932355}
+  popingParticle: {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
 --- !u!135 &8738796976676395877 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 2861624910304857164, guid: e26ffb81aef156846b57c1671a0759e3,

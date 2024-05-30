@@ -16,6 +16,9 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     [SerializeField] Transform canon;
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] Bullet towerBullet;
+    [SerializeField] GameObject rangeZone;
+    [SerializeField] ParticleSystem popingParticle;
+
     
     //TimeStamp
     GameObject currentGameobject;
@@ -51,6 +54,7 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     private void Start()
     {
         OnAttack += Spawn;
+        
     }
 
     public void Attack()
@@ -90,6 +94,7 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     {
         currentGameobject = Instantiate(ObjectToSpawn, SpawnPosition, canon.rotation);
         currentBullet = currentGameobject.GetComponent<Bullet>();
+        
 
         currentBullet.Strength = Strength;
         currentBullet.currentTarget = currentTarget;
@@ -98,6 +103,12 @@ public abstract class Tower : MonoBehaviour, ISpawner, IAttack
     public void Upgrade()
     {
 
+    }
+
+    public void OnPose()
+    {
+        popingParticle.Play();
+        Instantiate(popingParticle,transform);
     }
 
     #region event
