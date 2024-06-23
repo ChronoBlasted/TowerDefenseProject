@@ -2,6 +2,7 @@ using BaseTemplate.Behaviours;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class WaveManager : MonoSingleton<WaveManager>
@@ -21,6 +22,8 @@ public class WaveManager : MonoSingleton<WaveManager>
 
     [Space(10)]
     public Transform[] spawnerList;
+    [HideInInspector] public List<GameObject> enemiesList;
+    private bool finishedWaveCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +85,8 @@ public class WaveManager : MonoSingleton<WaveManager>
         {
             if (randomValue < entry.Value)
             {
-                Instantiate(entry.Key, spawnerList[Random.Range(0, spawnerList.Length)]);
+                GameObject newEnemy = Instantiate(entry.Key, spawnerList[Random.Range(0, spawnerList.Length)]);
+                enemiesList.Add(newEnemy);
                 break;
             }
             else
@@ -101,8 +105,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     {
         yield return new WaitForEndOfFrame();
 
-        AMonster[] remainingMonsterList = FindObjectsOfType<AMonster>();
-        if (remainingMonsterList.Length == 0 && GameManager.Instance.gameState == GAMESTATE.GAME)
+        if (enemiesList.Count == 0 && finishedWaveCoroutine && GameManager.Instance.gameState == GAMESTATE.GAME)
         {
             StartCoroutine(NextWaveCoroutine());
         }
@@ -112,6 +115,7 @@ public class WaveManager : MonoSingleton<WaveManager>
     {
         currentWave++;
         UIManager.Instance.GameView.UpdateCurrentWave(currentWave);
+        finishedWaveCoroutine = false;
 
         yield return new WaitForSeconds(timeBetweenWaves);
         for (int i = 0; i < (amountOfMonsterPerWave + (currentWave * amountOfMonsterAddedPerWave)) ; i++)
@@ -119,5 +123,6 @@ public class WaveManager : MonoSingleton<WaveManager>
             ChooseRandomMonster();
             yield return new WaitForSeconds(0.5f);
         }
+        finishedWaveCoroutine = true;
     }
 }

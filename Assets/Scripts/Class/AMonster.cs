@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
 {
@@ -13,6 +14,7 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     private Nexus nexus;
     public ParticleSystem deathParticleSystem, attackParticleSystem;
     public Slider healthSlider;
+    private bool dieEventHasEnded;
 
     public int amountReward;
     public RESOURCETYPE typeReward;
@@ -56,14 +58,21 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
         if (Health <= 0)
         {
             OnDie.Invoke();
+            StartCoroutine(DeathEffectCoroutine());
         }
     }
 
     void Start()
     {
+        dieEventHasEnded = false;
         OnDie += DropResouces;
-        OnDie += DeathEffect;
         OnDie += CheckWaveState;
+        OnDie += DeathEffect;
+
+        OnAttack += DropResouces;
+        OnAttack += CheckWaveState;
+        OnAttack += AttackEffect;
+
         Health = MaxHealth;
         OnDestinationReached += Attack;
         ChooseTarget();
@@ -98,16 +107,30 @@ public class AMonster : MonoBehaviour, IAttack, IHealth, IMove
     void DeathEffect()
     {
         Instantiate<ParticleSystem>(deathParticleSystem, transform.position, transform.rotation);
+        WaveManager.Instance.enemiesList.Remove(this.gameObject);
+        dieEventHasEnded = true;
+    }
+
+    void AttackEffect()
+    {
+        WaveManager.Instance.enemiesList.Remove(this.gameObject);
+        dieEventHasEnded = true;
+    }
+    IEnumerator DeathEffectCoroutine()
+    {
+        while (!dieEventHasEnded)
+        {
+            yield return null;
+        }
         Destroy(this.gameObject);
     }
 
     public void Attack()
     {
         nexus.TakeDamage(Strength);
-        DropResouces();
         Instantiate<ParticleSystem>(attackParticleSystem, transform.position, transform.rotation);
-        CheckWaveState();
-        Destroy(this.gameObject);
+        OnAttack.Invoke();
+        StartCoroutine(DeathEffectCoroutine());
     }
 
     public void ChooseTarget()
